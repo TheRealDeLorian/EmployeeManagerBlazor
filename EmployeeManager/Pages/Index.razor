@@ -6,3 +6,26 @@
 
 Welcome to your new app.
 
+<button @onclick="PressButton">Start!</button>
+
+@code 
+{
+    int i = 0;
+    bool buttonPressed;
+    void PressButton()
+    {
+        buttonPressed = !buttonPressed;
+    }
+}
+
+@if(buttonPressed == true)
+{
+    
+    @while (true)
+    {
+        <h1>i</h1>
+        i++;
+    }
+
+}
+
