@@ -1,8 +1,5 @@
 ﻿@page "/employees"
-@using EmployeeManager.Data.Models;
-@using EmployeeManager.Data;
-@using Microsoft.EntityFrameworkCore;
-@inject EmployeeManagerDbContext Context
+@inject IDbContextFactory<EmployeeManagerDbContext> ContextFactory
 
 <PageTitle>Employees</PageTitle>
 
@@ -39,9 +36,12 @@ else
 
 @code {
     private Employee[]? Employees { get; set; }
+    
     protected override async Task OnInitializedAsync()
     {
-        Employees = await Context.Employees
+        using var context = ContextFactory.CreateDbContext();
+
+        Employees = await context.Employees
         .Include(emp => emp.Department)
         .ToArrayAsync();
     }
