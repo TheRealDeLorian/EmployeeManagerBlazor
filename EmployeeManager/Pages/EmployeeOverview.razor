@@ -11,6 +11,20 @@
 }
 else
 {
+    <div>The magic is about to happen...</div>
+    @if(!clicked)
+    {
+        <button @onclick="OnClick">Click to disappear!</button>
+    }
+    else
+    {
+        <button @onclick="OnClick">Click to reappear!</button>
+
+    }
+
+    @if(!clicked)
+    {
+        
     <table class="table table-striped">
         <thead>
             <tr>
@@ -32,11 +46,19 @@ else
             }
         </tbody>
     </table>
+    }
 }
 
 @code {
     private Employee[]? Employees { get; set; }
-    
+
+    bool clicked = false;
+
+    void OnClick()
+    {
+        clicked = !clicked;
+    }
+
     protected override async Task OnInitializedAsync()
     {
         using var context = ContextFactory.CreateDbContext();
