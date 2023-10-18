@@ -1,0 +1,43 @@
+﻿@page "/employees/add"
+
+<PageTitle>Add Employee</PageTitle>
+
+<h3>Add Employee</h3>
+
+@if(Employee is not null)
+{
+    <EditForm Model="@Employee">
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
+
+        <div class="mb-3">
+            <label for="firstname" class="form-label">Firstname</label>
+            <InputText id="firstname" class="form-control"
+                        @bind-Value="Employee.FirstName" />
+        </div>
+
+        <div class="mb-3">
+            <label for="lastname" class="form-label">Lastname</label>
+            <InputText id="lastname" class="form-control"
+                        @bind-Value="Employee.LastName" />
+        </div>
+
+        <div class="mb-3">
+            <label for="isDeveloper" class="form-label">Is developer:</label>
+            <InputCheckbox id="isDeveloper" class="form-check-input"
+            @bind-Value="Employee.IsDeveloper" />
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Add</button>
+    </EditForm>
+}
+
+@code {
+    public Employee? Employee { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Employee = new();
+    }
+}
